@@ -54,11 +54,12 @@ for dir in os.listdir(minecraft_dir):
     
     os.chdir(path)
 
-    with zipfile.ZipFile(old_cwd + '\\' + export_dir + '\\' + valid_worldname + '.mcworld', 'w') as zip:
+    with zipfile.ZipFile(old_cwd + '\\' + export_dir + '\\' + valid_worldname + '.mcworld', 'w', zipfile.ZIP_DEFLATED) as zip:
         for root, dirs, files in os.walk(path):
             for file in files:
                 #print(root.replace(path + '\\', ''))
-                zip.write(root.replace(path + '\\', '') + '\\' + file)
+                print(root.replace(path + '\\', '').replace(path, '') + '\\' + file)
+                zip.write("." + '\\' + root.replace(path + '\\', '').replace(path, '') + '\\' + file)
     
     os.chdir(old_cwd)
 
